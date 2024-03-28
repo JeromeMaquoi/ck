@@ -1,7 +1,8 @@
 package com.github.mauricioaniche.ck.util;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,8 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class LOCCalculator {
-
-	private static Logger log = Logger.getLogger(LOCCalculator.class);
+	private static final Logger log = LoggerFactory.getLogger(LOCCalculator.class);
 	
 	public static int calculate(String sourceCode) {
 		try {

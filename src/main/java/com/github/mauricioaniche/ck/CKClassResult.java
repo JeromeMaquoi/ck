@@ -24,6 +24,7 @@ public class CKClassResult {
 
 	private int nosi;
 	private int loc;
+	private int totalLine;
 	
 	private Set<CKMethodResult> methods;
 	private Set<CKMethodResult> visibleMethods;
@@ -205,8 +206,16 @@ public class CKClassResult {
 		return loc;
 	}
 
+	public int getTotalLine() {
+		return totalLine;
+	}
+
 	public void setLoc(int loc) {
 		this.loc = loc;
+	}
+
+	public void setTotalLine(int totalLine) {
+		this.totalLine = totalLine;
 	}
 
 

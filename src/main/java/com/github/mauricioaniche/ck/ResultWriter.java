@@ -2,13 +2,15 @@ package com.github.mauricioaniche.ck;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
 public class ResultWriter {
-
+    private final Logger log = LoggerFactory.getLogger(ResultWriter.class);
     private static final String[] CLASS_HEADER = {
             "file",
             "class",
@@ -53,6 +55,7 @@ public class ResultWriter {
             /* Others */
             "nosi",
             "loc",
+            "totalLine",
             "returnQty",
             "loopQty",
             "comparisonsQty",
@@ -83,6 +86,7 @@ public class ResultWriter {
             "wmc", 
             "rfc", 
             "loc",
+            "totalLine",
             "returnsQty", 
             "variablesQty", 
             "parametersQty", 
@@ -147,7 +151,6 @@ public class ResultWriter {
      * @throws IOException If output files cannot be written to
      */
     public void printResult(CKClassResult result) throws IOException {
-
         this.classPrinter.printRecord(
                 result.getFile(),
                 result.getClassName(),
@@ -192,6 +195,7 @@ public class ResultWriter {
                 /* Others */
                 result.getNosi(),
                 result.getLoc(),
+                result.getTotalLine(),
                 result.getReturnQty(),
                 result.getLoopQty(),
                 result.getComparisonsQty(),
@@ -224,6 +228,7 @@ public class ResultWriter {
                     method.getWmc(), 
                     method.getRfc(), 
                     method.getLoc(),
+                    method.getTotalLine(),
                     method.getReturnQty(), 
                     method.getVariablesQty(), 
                     method.getParametersQty(),

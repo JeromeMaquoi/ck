@@ -4,6 +4,7 @@ import com.github.mauricioaniche.ck.metric.CKASTVisitor;
 import com.github.mauricioaniche.ck.metric.ClassLevelMetric;
 import com.github.mauricioaniche.ck.metric.MethodLevelMetric;
 import com.github.mauricioaniche.ck.util.JDTUtils;
+import com.github.mauricioaniche.ck.util.TotalLineCalculator;
 import org.eclipse.jdt.core.dom.*;
 
 import java.util.HashSet;
@@ -63,6 +64,7 @@ public class CKVisitor extends ASTVisitor {
 		int modifiers = node.getModifiers();
 		CKClassResult currentClass = new CKClassResult(sourceFilePath, className, type, modifiers);
 		currentClass.setLoc(calculate(node.toString()));
+		currentClass.setTotalLine(TotalLineCalculator.calculateTotalLine(node.toString()));
 		
 		// there might be metrics that use it
 		// (even before a class is declared)
@@ -118,7 +120,9 @@ public class CKVisitor extends ASTVisitor {
 		String className = ((currentQualifiedMethodName.lastIndexOf(currentMethodName) - 1) > 0) ? currentQualifiedMethodName.substring(0, (currentQualifiedMethodName.lastIndexOf(currentMethodName) - 1)) : "";
 
 		CKMethodResult currentMethod = new CKMethodResult(currentMethodName, currentQualifiedMethodName, isConstructor, node.getModifiers());
+		System.out.println(node);
 		currentMethod.setLoc(calculate(node.toString()));
+		currentMethod.setTotalLine(TotalLineCalculator.calculateTotalLine(node.toString()));
 		currentMethod.setStartLine(JDTUtils.getStartLine(cu, node));
 
 		// let's instantiate method level visitors for this current method
@@ -171,6 +175,7 @@ public class CKVisitor extends ASTVisitor {
 		String anonClassName = classes.peek().result.getClassName() + "$Anonymous" + ++anonymousNumber;
 		CKClassResult currentClass = new CKClassResult(sourceFilePath, anonClassName, "anonymous", -1);
 		currentClass.setLoc(calculate(node.toString()));
+		currentClass.setTotalLine(TotalLineCalculator.calculateTotalLine(node.toString()));
 
 		// create a set of visitors, just for the current class
 		List<ClassLevelMetric> classLevelMetrics = instantiateClassLevelMetricVisitors(anonClassName);
@@ -213,6 +218,7 @@ public class CKVisitor extends ASTVisitor {
 
 		CKMethodResult currentMethod = new CKMethodResult(currentMethodName, currentMethodName, false, node.getModifiers());
 		currentMethod.setLoc(calculate(node.toString()));
+		currentMethod.setTotalLine(TotalLineCalculator.calculateTotalLine(node.toString()));
 		currentMethod.setStartLine(JDTUtils.getStartLine(cu, node));
 
 		// let's instantiate method level visitors for this current method
@@ -269,6 +275,7 @@ public class CKVisitor extends ASTVisitor {
 		int modifiers = node.getModifiers();
 		CKClassResult currentClass = new CKClassResult(sourceFilePath, className, type, modifiers);
 		currentClass.setLoc(calculate(node.toString()));
+		currentClass.setTotalLine(TotalLineCalculator.calculateTotalLine(node.toString()));
 
 		// create a set of visitors, just for the current class
 		List<ClassLevelMetric> classLevelMetrics = instantiateClassLevelMetricVisitors(className);

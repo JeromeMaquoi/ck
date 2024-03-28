@@ -19,6 +19,7 @@ public class CKMethodResult {
 	private int parametersQty;
 	private int returnQty;
 	private int loc;
+	private int totalLine;
 	private int variablesQty;
 	private Map<String, Integer> variablesUsage;
 	private int startLine;
@@ -159,12 +160,20 @@ public class CKMethodResult {
 		this.loc = loc;
 	}
 
+	public void setTotalLine(int totalLine) {
+		this.totalLine = totalLine;
+	}
+
 	public void setVariablesQty(int variablesQty) {
 		this.variablesQty = variablesQty;
 	}
 
 	public int getLoc() {
 		return loc;
+	}
+
+	public int getTotalLine() {
+		return totalLine;
 	}
 
 	public int getParametersQty() {

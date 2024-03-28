@@ -1,6 +1,7 @@
 package com.github.mauricioaniche.ck;
 
 import com.github.mauricioaniche.ck.util.FileUtils;
+import org.apache.log4j.BasicConfigurator;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 public class Runner {
 
 	public static void main(String[] args) throws IOException {
-
+		BasicConfigurator.configure();
 		if (args == null || args.length < 1) {
 			System.out.println("Usage java -jar ck.jar <path to project> <use Jars=true|false> <max files per partition, 0=automatic selection> <print variables and fields metrics? True|False> <path to save the output files>");
 			System.exit(1);

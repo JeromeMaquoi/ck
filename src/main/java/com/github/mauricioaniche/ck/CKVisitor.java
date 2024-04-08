@@ -120,7 +120,6 @@ public class CKVisitor extends ASTVisitor {
 		String className = ((currentQualifiedMethodName.lastIndexOf(currentMethodName) - 1) > 0) ? currentQualifiedMethodName.substring(0, (currentQualifiedMethodName.lastIndexOf(currentMethodName) - 1)) : "";
 
 		CKMethodResult currentMethod = new CKMethodResult(currentMethodName, currentQualifiedMethodName, isConstructor, node.getModifiers());
-		System.out.println(node);
 		currentMethod.setLoc(calculate(node.toString()));
 		currentMethod.setTotalLine(TotalLineCalculator.calculateTotalLine(node.toString()));
 		currentMethod.setStartLine(JDTUtils.getStartLine(cu, node));
